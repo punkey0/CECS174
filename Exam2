@@ -1,0 +1,275 @@
+Problem 1
+
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.Applet;
+public class ExamDiamond extends Applet implements MouseListener,MouseMotionListener
+{
+private int[] x = {50,100,150,100};
+private int[] y = {100,25,100,175};
+private Polygon tri = new Polygon(x,y,4);
+private int oldx;
+private int oldy;
+private int[] x2 = {190,150,190,230};
+private int[] y2 = {150,210,270,210};
+private Polygon tri2 = new Polygon(x2,y2,4);
+private int oldx2;
+private int oldy2;
+private int[] x3 = {50,80,110,80};
+private int[] y3 = {225,180,225,270};
+private Polygon tri3 = new Polygon(x3,y3,4);
+private int oldx3;
+private int oldy3;
+private int[] x4 = {50,70,90,70};
+private int[] y4 = {150,120,150,180};
+private Polygon tri4 = new Polygon(x4,y4,4);
+private int oldx4;
+private int oldy4;
+public void init()
+{
+addMouseListener(this);
+addMouseMotionListener(this);
+}
+public void paint(Graphics g)
+{
+g.setColor(Color.BLUE);
+g.fillPolygon(tri);
+g.setColor(Color.GREEN);
+g.fillPolygon(tri2);
+g.setColor(Color.RED);
+g.fillPolygon(tri3);
+g.setColor(Color.YELLOW);
+g.fillPolygon(tri4);
+}
+public void mousePressed(MouseEvent event)
+{
+int x = event.getX();
+int y = event.getY();
+if (tri.contains(x,y))
+{
+oldx=x;
+oldy=y;//saves x and y if inside triangle
+}
+if (tri2.contains(x,y))
+{
+oldx2=x;
+oldy2=y;//saves x and y if inside triangle
+}
+if (tri3.contains(x,y))
+{
+oldx3=x;
+oldy3=y;//saves x and y if inside triangle
+}
+if (tri4.contains(x,y))
+{
+oldx4=x;
+oldy4=y;//saves x and y if inside triangle
+}
+}
+public void mouseDragged(MouseEvent event)
+{
+int x = event.getX();
+int y = event.getY();
+if (tri.contains(x,y))
+{
+tri.translate(x-oldx,y-oldy);//gets new x/y but saves old
+oldx=x;
+oldy=y;
+repaint();
+}
+if (tri2.contains(x,y))
+{
+tri2.translate(x-oldx2,y-oldy2);//gets new x/y but saves old
+oldx2=x;
+oldy2=y;
+repaint();
+}
+if (tri3.contains(x,y))
+{
+tri3.translate(x-oldx3,y-oldy3);//gets new x/y but saves old
+oldx3=x;
+oldy3=y;
+repaint();
+}
+if (tri4.contains(x,y))
+{
+tri4.translate(x-oldx4,y-oldy4);//gets new x/y but saves old
+oldx4=x;
+oldy4=y;
+repaint();
+}
+}
+public void mouseReleased(MouseEvent event){}
+public void mouseClicked(MouseEvent event){}
+public void mouseEntered(MouseEvent event){}
+public void mouseExited(MouseEvent event){}
+public void mouseMoved(MouseEvent event){}
+}
+
+Problem 2
+
+import java.text.*;
+import java.util.*;
+public class ExamQuadratic
+{
+public static void main(String[] args)
+{
+int a,b,c;
+double discriminate,solutionX1,solutionX2;
+Scanner scan = new Scanner(System.in);
+System.out.print("Enter the coefficients to solve the equation: ");
+a=scan.nextInt();
+b=scan.nextInt();
+c=scan.nextInt();
+discriminate=b*b-4*a*c;
+if (discriminate >= 0.0)
+{
+System.out.print("There are real solutions");
+solutionX1=(-1.0*b-Math.sqrt(discriminate))/(2.0*a);
+solutionX2=(-1.0*b+Math.sqrt(discriminate))/(2.0*a);
+System.out.println(" which are: ("+solutionX1+", "+solutionX2+").");
+}
+else
+{
+System.out.println("There is NO real solution.");
+}
+}
+}
+
+Problem 3
+
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.Applet;
+public class ExamSelect extends Applet
+{
+Button draw = new Button("Draw");
+DrawOn canvas = new DrawOn();
+Choice shape = new Choice();
+CheckboxGroup colors = new CheckboxGroup();
+Checkbox red = new Checkbox("Red",true,colors);
+Checkbox green = new Checkbox("Green",false,colors);
+Checkbox blue = new Checkbox("Blue",false,colors);
+public void init()
+{
+add(draw);
+add(shape);
+add(red);
+add(green);
+add(blue);
+add(canvas);
+shape.add("Square");
+shape.add("Circle");
+shape.select(0);
+canvas.setSize(150,150);
+draw.addActionListener(canvas);
+}
+class DrawOn extends Canvas implements ActionListener
+{
+public void actionPerformed(ActionEvent event)
+{
+repaint();
+}
+public void paint(Graphics g)
+{
+Color c;
+if (red.getState())
+c = Color.red;
+else if (green.getState())
+c = Color.green;
+else
+c = Color.blue;
+g.setColor(c);
+if (shape.getSelectedItem().equals("Square"))
+g.fillRect(20,20,100,100);
+else
+g.fillOval(20,20,100,100);
+}
+}
+}
+
+Problem 4
+
+import java.text.*;
+import java.util.*;
+public class ExamCramer
+{
+public static void main(String[] args)
+{
+int a1=0,b1=0,c1=0;
+int a2=0,b2=0,c2=0;
+double det,detx,dety,x=0.0,y=0.0;
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter First Equation in the form: a1 b1 c1: ");
+a1 = sc.nextInt();
+b1 = sc.nextInt();
+c1 = sc.nextInt();
+System.out.print("Enter Second Equation in the form: a2 b2 c2: ");
+a2 = sc.nextInt();
+b2 = sc.nextInt();
+c2 = sc.nextInt();
+det = determinate(a1,b1,a2,b2);
+if (det==0.0)
+System.out.print("The coefficients form a singular matrix, NO SOLUTION");
+else
+{
+detx = determinate(c1,b1,c2,b2);
+dety = determinate(a1,c1,a2,c2);
+x = detx/det;
+y = dety/det;
+System.out.println("The solution to the system of equations is ("+x+", "+y+").");
+}
+}
+public static double determinate(int a,int b,int c,int d)
+{
+return 1.0*(a*d-b*c);
+}
+}
+
+Problem 5
+
+import java.text.*;
+import java.util.*;
+public class ExamCramer
+{
+public static void main(String[] args)
+{
+int a1=0,b1=0,c1=0,d1=0;
+int a2=0,b2=0,c2=0,d2=0;
+int a3=0,b3=0,c3=0,d3=0;
+double det,detx,dety,detz,x=0.0,y=0.0,z=0.0;
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter First Equation in the form: a1 b1 c1 d1: ");
+a1 = sc.nextInt();
+b1 = sc.nextInt();
+c1 = sc.nextInt();
+d1 = sc.nextInt();
+System.out.print("Enter Second Equation in the form: a2 b2 c2 d2: ");
+a2 = sc.nextInt();
+b2 = sc.nextInt();
+c2 = sc.nextInt();
+d2 = sc.nextInt();
+System.out.print("Enter Third Equation in the form: a3 b3 c3 d3: ");
+a3 = sc.nextInt();
+b3 = sc.nextInt();
+c3 = sc.nextInt();
+d3 = sc.nextInt();
+det = determinate(a1,b1,c1,a2,b2,c2,a3,b3,c3);
+if (det==0.0)
+System.out.print("The coefficients form a singular matrix, NO SOLUTION");
+else
+{
+detx = determinate(d1,b1,c1,d2,b2,c2,d3,b3,c3);
+dety = determinate(a1,d1,c1,a2,d2,c2,a3,d3,c3);
+detz = determinate(a1,b1,d1,a2,b2,d2,a3,b3,d3);
+x = detx/det;
+y = dety/det;
+z = detz/det;
+System.out.println("The solution to the system of equations is ("+x+", "+y+", "+z+").");
+}
+}
+public static double determinate(int a,int b,int c,int d,int e,int f,int g,int h,int i)
+{
+return 1.0*(a*e*i+d*h*c+g*b*f-a*h*f-d*b*i-g*e*c);
+}
+}
