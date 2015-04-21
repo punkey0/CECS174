@@ -1,0 +1,211 @@
+Problem 1
+
+import javax.swing.*;
+public class ExamDiceRoller
+{
+  public static void main(String[] args)
+  {
+    int freq1=0,freq2=0,freq3=0,freq4=0,freq5=0,freq6=0,freq7=0,freq8=0,freq9=0,freq10=0,freq11=0,freq12=0,freq13=0,freq14=0,freq15=0,freq16=0,freq17=0,freq18=0,freq19=0,freq20=0,freq21=0,freq22=0,freq23=0,freq24=0,freq25=0,freq26=0,freq27=0,freq28=0,freq29=0,freq30=0,face=0,avg=0;
+    for (int roll=1;roll<=40000;roll++)
+    {
+      face=1+(int)(Math.random()*30);
+      switch(face)
+      {
+        case 1:
+        ++freq1;
+        break;
+        case 2:
+        ++freq2;
+        break;
+        case 3:
+        ++freq3;
+        break;
+        case 4:
+        ++freq4;
+        break;
+        case 5:
+        ++freq5;
+        break;
+        case 6:
+        ++freq6;
+        break;
+        case 7:
+        ++freq7;
+        break;
+        case 8:
+        ++freq8;
+        break;
+        case 9:
+        ++freq9;
+        break;
+        case 10:
+        ++freq10;
+        break;
+        case 11:
+        ++freq11;
+        break;
+        case 12:
+        ++freq12;
+        break;
+        case 13:
+        ++freq13;
+        break;
+        case 14:
+        ++freq14;
+        break;
+        case 15:
+        ++freq15;
+        break;
+        case 16:
+        ++freq16;
+        break;
+        case 17:
+        ++freq17;
+        break;
+        case 18:
+        ++freq18;
+        break;
+        case 19:
+        ++freq19;
+        break;
+        case 20:
+        ++freq20;
+        break;
+        case 21:
+        ++freq21;
+        break;
+        case 22:
+        ++freq22;
+        break;
+        case 23:
+        ++freq23;
+        break;
+        case 24:
+        ++freq24;
+        break;
+        case 25:
+        ++freq25;
+        break;
+        case 26:
+        ++freq26;
+        break;
+        case 27:
+        ++freq27;
+        break;
+        case 28:
+        ++freq28;
+        break;
+        case 29:
+        ++freq29;
+        break;
+        case 30:
+        ++freq30;
+        break;
+      }
+    }
+  avg = ((freq1+freq2+freq3+freq4+freq5+freq6+freq7+freq8+freq9+freq10+freq11+freq12+freq13+freq14+freq15+freq16+freq17+freq18+freq19+freq20+freq21+freq22+freq23+freq24+freq25+freq26+freq27+freq28+freq29+freq30)/30);
+  JTextArea outputArea = new JTextArea(15,20); //7 rows, 20 characters
+  JScrollPane Scroller = new JScrollPane(outputArea); //adds scroll bar
+  outputArea.setText("Face"+"\t"+"Frequency"+"\n1\t"+freq1+"\n2\t"+freq2+"\n3\t"+freq3+"\n4\t"+freq4+"\n5\t"+freq5+"\n6\t"+freq6+"\n7\t"+freq7+"\n8\t"+freq8+"\n9\t"+freq9+"\n10\t"+freq10+"\n11\t"+freq11+"\n12\t"+freq12+"\n13\t"+freq13+"\n14\t"+freq14+"\n15\t"+freq15+"\n16\t"+freq16+"\n17\t"+freq17+"\n18\t"+freq18+"\n19\t"+freq19+"\n20\t"+freq20+"\n21\t"+freq21+"\n22\t"+freq22+"\n23\t"+freq23+"\n24\t"+freq24+"\n25\t"+freq25+"\n26\t"+freq26+"\n27\t"+freq27+"\n28\t"+freq28+"\n29\t"+freq29+"\n30\t"+freq30+"\nWith an average of: "+avg);
+  JOptionPane.showMessageDialog(null,Scroller,"Rolling a 2xPentadecahedron 40,000 Times",JOptionPane.INFORMATION_MESSAGE);
+  System.exit(0);
+}
+
+Problem 2
+
+import javax.swing.*;
+import java.text.*;
+public class ExamCotan
+{
+public static void main(String[] args)
+{
+JOptionPane coTangent = new JOptionPane();
+String degrees;
+double answer,prex,x;
+JTextArea answerSpace = new JTextArea();
+DecimalFormat df = new DecimalFormat("0.00000");
+degrees=coTangent.showInputDialog("Enter Angle in Degrees to Find Cotangent:");
+prex = Double.parseDouble(degrees);
+x = prex*3.14159/180.0; 
+answer = 1.0/(Math.tan(x));
+answerSpace.setText("The Cotangent is: "+df.format(answer));
+JOptionPane.showMessageDialog(null,answerSpace,"Finding Cotangent",JOptionPane.INFORMATION_MESSAGE);
+System.exit(0);
+}
+}
+
+Problem 3
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import java.text.*;
+import java.util.*;
+import java.io.*;
+public class ExamNames
+{
+public static void main(String[] args) throws FileNotFoundException,IOException
+{
+JOptionPane myWindow;
+myWindow = new JOptionPane();
+String fileName;
+fileName=myWindow.showInputDialog("Enter External Text File to Open: ");
+Scanner scanner = new Scanner(new File(fileName));
+String firstName,middleName,lastName;
+JTextArea outputTextArea=new JTextArea();
+outputTextArea.setText("The Initials Are:\n");
+Scanner scanner2=new Scanner(new File(fileName));
+while(scanner2.hasNext())
+{
+String fullName=scanner2.nextLine();
+StringTokenizer st=new StringTokenizer(fullName," ");
+firstName=st.nextToken();
+middleName=st.nextToken();
+lastName=st.nextToken();
+outputTextArea.append(firstName.substring(0,1)+"."+middleName.substring(0,1)+"."+lastName.substring(0,1)+".\n");
+}
+myWindow.showMessageDialog(null,outputTextArea,"Results...",myWindow.INFORMATION_MESSAGE);
+scanner.close();
+scanner2.close();
+}
+}
+
+Problem 4
+
+import javax.swing.*;
+import java.text.*;
+public class ExamFactorial
+{
+public static void main(String[] args)
+{
+JOptionPane facWindow = new JOptionPane();
+JTextArea answers = new JTextArea();
+DecimalFormat df = new DecimalFormat("0");
+answers.setText("n"+"\tn!"+"\tStirling n!"+"\tGosper n!"+"\n"+"1"+"\t"+fac(1)+"\t"+df.format(Stirling(1))+"\t"+df.format(Gosper(1))+"\n"+"2"+"\t"+fac(2)+"\t"+df.format(Stirling(2))+"\t"+df.format(Gosper(2))+"\n"+"3"+"\t"+fac(3)+"\t"+df.format(Stirling(3))+"\t"+df.format(Gosper(3))+"\n"+"4"+"\t"+fac(4)+"\t"+df.format(Stirling(4))+"\t"+df.format(Gosper(4))+"\n"+"5"+"\t"+fac(5)+"\t"+df.format(Stirling(5))+"\t"+df.format(Gosper(5))+"\n"+"6"+"\t"+fac(6)+"\t"+df.format(Stirling(6))+"\t"+df.format(Gosper(6))+"\n"+"7"+"\t"+fac(7)+"\t"+df.format(Stirling(7))+"\t"+df.format(Gosper(7))+"\n"+"8"+"\t"+fac(8)+"\t"+df.format(Stirling(8))+"\t"+df.format(Gosper(8))+"\n"+"9"+"\t"+fac(9)+"\t"+df.format(Stirling(9))+"\t"+df.format(Gosper(9))+"\n"+"10"+"\t"+fac(10)+"\t"+df.format(Stirling(10))+"\t"+df.format(Gosper(10))+"\n"+"11"+"\t"+fac(11)+"\t"+df.format(Stirling(11))+"\t"+df.format(Gosper(11))+"\n"+"12"+"\t"+fac(12)+"\t"+df.format(Stirling(12))+"\t"+df.format(Gosper(12)));
+facWindow.showMessageDialog(null,answers,"Factorial Approximations!",facWindow.INFORMATION_MESSAGE);
+}
+public static int fac(int n)
+{
+int ans=1;
+for(int i=1;i<=n;i++)
+ans=ans*i;
+return ans;
+}
+public static double Stirling(int input)
+{
+double ans=0;
+final double PI = 3.141592;
+final double E = 2.7182818;
+for (int i=1;i<=50;i++)
+ans = (Math.sqrt(2*PI)*Math.pow(input,(input+0.5))*Math.pow(E,(-(input)+(1.0/(12.0*input)))));
+return ans;
+}
+public static double Gosper(int input)
+{
+double ans=0.0;
+final double PI = 3.141592;
+final double E = 2.7182818;
+for (int i=1;i<=100;i++)
+ans = (Math.sqrt(((2*input)+(1.0/3.0))*PI)*(Math.pow(input,input)*Math.pow(E,-(input))));
+return ans;
+}
+}
